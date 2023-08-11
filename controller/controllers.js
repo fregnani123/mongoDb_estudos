@@ -22,4 +22,27 @@ module.exports = {
         }
     },
 
+    deletaCadastro: async (req, res) => {
+        const personId = req.params.id; // Supondo que o ID da pessoa a ser deletada está nos parâmetros da URL
+
+        try {
+            const person = await Person.findByIdAndDelete(personId);
+            if (!person) {
+                return res.status(404).json({ error: 'Pessoa não encontrada' });
+            }
+            res.json({ message: 'Pessoa deletada com sucesso' });
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    },
+
+    todosOsCadastros: async (req,res)=>{
+        try{
+            const person = await Person.find();
+
+            res.status(200).json(person)
+        }catch(error){
+            res.status(500).json({ error: error.message });
+        }
+    }
 };
