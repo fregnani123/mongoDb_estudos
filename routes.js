@@ -8,6 +8,6 @@ routes.delete('/delete',controllers.deletaCadastro)
 
 routes.get('/todos',controllers.todosOsCadastros)
 
-
+routes.get ('/person/:id', controllers.encontrarUm)
 
 module.exports = routes;

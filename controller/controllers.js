@@ -38,11 +38,25 @@ module.exports = {
 
     todosOsCadastros: async (req,res)=>{
         try{
-            const person = await Person.find();
+            const people = await Person.find();
 
-            res.status(200).json(person)
+            res.status(200).json(people)
         }catch(error){
+            res.status(500).json({ error: error.message });
+        }
+    },
+
+    encontrarUm: async (req, res) => {
+        const id = req.params.id
+
+        try {
+            const person = await Person.findOne({ _id: id})
+            res.status(200).json(person)
+         } 
+        catch (error) {
             res.status(500).json({ error: error.message });
         }
     }
 };
+
+  
