@@ -2,8 +2,15 @@ const Person = require('../models/Person')
 
 module.exports = {
     novoCadastro: async (req, res) => {
-        const { name, salary, approved } = req.body;
-      
+        const { name, salary } = req.body;
+        let approved;
+
+        if (salary < 1000) {
+            approved = 'negado'
+        } else {
+           approved = 'aprovado';
+        };
+
         if (!name || !salary) {
             return res.status(400).json({ error: 'Nome e salário são campos obrigatórios' });
         }
